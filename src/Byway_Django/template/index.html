@@ -394,23 +394,23 @@
       });
 
       // Add scroll to top functionality
-      const scrollToTopButton = document.getElementById('scroll-to-top');
-      if (scrollToTopButton) {
-        window.addEventListener('scroll', () => {
-          if (window.pageYOffset > 300) {
-            scrollToTopButton.classList.remove('hidden');
-          } else {
-            scrollToTopButton.classList.add('hidden');
-          }
-        });
+      // const scrollToTopButton = document.getElementById('scroll-to-top');
+      // if (scrollToTopButton) {
+      //   window.addEventListener('scroll', () => {
+      //     if (window.pageYOffset > 300) {
+      //       scrollToTopButton.classList.remove('hidden');
+      //     } else {
+      //       scrollToTopButton.classList.add('hidden');
+      //     }
+      //   });
 
-        scrollToTopButton.addEventListener('click', () => {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-        });
-      }
+      //   scrollToTopButton.addEventListener('click', () => {
+      //     window.scrollTo({
+      //       top: 0,
+      //       behavior: 'smooth'
+      //     });
+      //   });
+      // }
     });
   </script>
 </body>

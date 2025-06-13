@@ -103,9 +103,7 @@
 
                         <!-- Languages -->
                         <div class="flex items-center gap-3">
-                            <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9"/>
-                            </svg>
+                            <img src="{% static 'images/assets/icons/globe.svg' %}" alt="">
                             <p class="text-base text-gray-700">English, Spanish, Italian, German</p>
                         </div>
                     </div>
@@ -203,58 +201,21 @@
                                 <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
                                 <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
                                 <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
                             </div>
                             <h5 class="text-sm text-gray-700">80%</h5>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="flex">
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                            </div>
-                            <h5 class="text-sm text-gray-700">10%</h5>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="flex">
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                            </div>
-                            <h5 class="text-sm text-gray-700">5%</h5>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="flex">
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                            </div>
-                            <h5 class="text-sm text-gray-700">3%</h5>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="flex">
-                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
-                            </div>
-                            <h5 class="text-sm text-gray-700">2%</h5>
                         </div>
                     </div>
                 </div>
 
                 <div class="my-8">
                     <!-- Reviews -->
-                    <div class="w-full md:w-4/5 space-y-4" id="reviewContainer"></div>
+                    <div class="w-full md:w-4/5 space-y-4" id="reviewContainer" 
+                         data-star-icon="{% static 'images/assets/icons/star.svg' %}"
+                         data-empty-star-icon="{% static 'images/assets/icons/emptystar.svg' %}">
+                    </div>
                     <!-- Button -->
-                    <button onclick="toggleReviews()" id="toggleBtn" class="px-6 py-3 mt-8 border border-[#0F172A] text-sm font-medium rounded-md hover:bg-gray-100 transition">
+                    <button id="toggleBtn" class="px-6 py-3 mt-8 border border-[#0F172A] text-sm font-medium rounded-md hover:bg-gray-100 transition">
                         View more Reviews
                     </button>
                 </div>
@@ -269,10 +230,10 @@
                         What Our Customers Say <br /> About Us
                     </h2>
                     <div class="flex items-center space-x-1 sm:space-x-2">
-                        <button onclick="prevSlide()" class="bg-[#94A3B8] sm:p-1.5 rounded hover:bg-[#CBD5E1]">
+                        <button id="prevTestimonial" class="bg-[#94A3B8] sm:p-1.5 rounded hover:bg-[#CBD5E1]">
                             <img src="{% static 'images/assets/icons/leftarrow.svg' %}" alt="Left" />
                         </button>
-                        <button onclick="nextSlide()" class="bg-[#94A3B8] sm:p-1.5 rounded hover:bg-[#CBD5E1]">
+                        <button id="nextTestimonial" class="bg-[#94A3B8] sm:p-1.5 rounded hover:bg-[#CBD5E1]">
                             <img src="{% static 'images/assets/icons/rightarrow.svg' %}" alt="Right" />
                         </button>
                     </div>
@@ -651,6 +612,18 @@ class TestimonialCarousel {
     initialize() {
         this.updateVisibleCards();
         window.addEventListener('resize', () => this.updateVisibleCards());
+        
+        // Add event listeners for navigation buttons
+        const prevButton = document.getElementById('prevTestimonial');
+        const nextButton = document.getElementById('nextTestimonial');
+        
+        if (prevButton) {
+            prevButton.addEventListener('click', () => this.prevSlide());
+        }
+        
+        if (nextButton) {
+            nextButton.addEventListener('click', () => this.nextSlide());
+        }
     }
 
     updateVisibleCards() {
@@ -742,7 +715,31 @@ class ReviewManager {
         ];
 
         this.showAll = false;
+        this.initialize();
+    }
+
+    initialize() {
         this.renderReviews();
+        const toggleBtn = document.getElementById('toggleBtn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => this.toggleReviews());
+        }
+    }
+
+    generateStarRating(rating) {
+        const container = document.getElementById('reviewContainer');
+        const starIcon = container.dataset.starIcon;
+        const emptyStarIcon = container.dataset.emptyStarIcon;
+        
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars += `<img src="${starIcon}" alt="star" class="w-5 h-5" />`;
+            } else {
+                stars += `<img src="${emptyStarIcon}" alt="empty star" class="w-5 h-5" />`;
+            }
+        }
+        return stars;
     }
 
     renderReviews() {
@@ -760,7 +757,7 @@ class ReviewManager {
                     <div class="sm:w-4/6">
                         <div class="text-lg text-[#0F172A] font-semibold flex items-center gap-8 mb-3">
                             <div class="flex items-center gap-1">
-                                <img src="{% static 'images/assets/icons/star.svg' %}" alt="star" class="w-5 h-5" />
+                                ${this.generateStarRating(review.rating)}
                                 <p class="text-lg">${review.rating}</p>
                             </div>
                             <p class="text-sm text-[#334155]">Reviewed on ${review.date}</p>
@@ -770,15 +767,17 @@ class ReviewManager {
                 </div>
             </div>
         `).join('');
+
+        // Update toggle button text
+        const toggleBtn = document.getElementById('toggleBtn');
+        if (toggleBtn) {
+            toggleBtn.textContent = this.showAll ? 'Show Less' : 'View More Reviews';
+        }
     }
 
     toggleReviews() {
         this.showAll = !this.showAll;
         this.renderReviews();
-        const toggleBtn = document.getElementById('toggleBtn');
-        if (toggleBtn) {
-            toggleBtn.innerText = this.showAll ? 'Show less' : 'View more Reviews';
-        }
     }
 }
 

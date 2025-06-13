@@ -1,4 +1,4 @@
-#!/home/user/Documents/IRFANA_HASSAN/irfana/projects/Byway_Django/venv/bin/python3
+#!/home/user/Byway_Django/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
