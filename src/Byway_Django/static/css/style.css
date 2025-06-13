@@ -1,0 +1,4 @@
+
+.hero-image {
+  background-image: url("{% static 'images/assets/Hero.png' %}");
+}

@@ -1,0 +1,1162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail - 50% Off</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .loading-spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+      <!-- Navbar -->
+  <header class="py-4 border-b">
+    <nav class="flex justify-between items-center w-[90%] max-w-[1900px] mx-auto">
+      <!-- Logo -->
+      <div class="flex justify-center items-center space-x-2">
+        <img src="{% static 'images/assets/logo.svg' %}" alt="Byway Logo" />
+        <span class="text-base font-inter">
+          <a href="/" class="text-xl">Byway</a>
+        </span>
+      </div>
+
+      <!-- Icons and Profile -->
+      <div class="flex justify-center gap-4 items-center">
+        <a href="#"><img src="{% static 'images/assets/icons/heart.svg' %}" alt="heart" class="h-8 w-8 hidden sm:inline-block" /></a>
+        <a href="#"><img src="{% static 'images/assets/icons/cart.svg' %}" alt="cart" class="h-8 w-8 hidden sm:inline-block" /></a>
+        <a href="#"><img src="{% static 'images/assets/icons/bell.svg' %}" alt="notification" class="h-8 w-8 hidden sm:inline-block" /></a>
+        <button id="profileBtn" class="w-12 h-12 rounded-full bg-gray-700 text-white text-lg font-medium flex items-center justify-center">J</button>
+      </div>
+    </nav>
+  </header>
+    <!-- Loading State -->
+    <div id="loading" class="flex justify-center items-center min-h-screen">
+        <div class="loading-spinner"></div>
+        <span class="ml-3 text-gray-600">Loading product...</span>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="hidden">
+        <!-- Product Card (Desktop positioning) -->
+        <div id="desktop-product-card" class="absolute right-[10%] lg:right-0 xl:right-[8%] top-[18%] hidden lg:block">
+            <!-- Product card content will be inserted here -->
+        </div>
+
+        <!-- Breadcrumb Section -->
+        <section class="bg-gray-50 py-4 mb-8">
+            <nav class="text-sm text-gray-500 p-4">
+                <div class="flex items-center gap-3 md:py-8 w-[90%] max-w-[1900px] mx-auto">
+                    <a href="/" class="text-sm md:text-base font-normal text-gray-700 hover:text-blue-600">Home</a>
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <a href="#" class="text-sm md:text-base font-normal text-gray-700 hover:text-blue-600">Products</a>
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span id="breadcrumb-title" class="text-sm md:text-base font-normal text-blue-600">Product</span>
+                </div>
+            </nav>
+
+            <!-- Main Product Section -->
+            <main class="flex flex-col lg:flex-row justify-between gap-12 w-[90%] max-w-[1900px] mx-auto">
+                <!-- Left: Product Description -->
+                <div class="py-6 w-full lg:w-3/5">
+                    <!-- Mobile Product Card -->
+                    <div id="mobile-product-card" class="lg:hidden my-8">
+                        <!-- Product card content will be inserted here -->
+                    </div>
+
+                    <h1 id="product-title" class="text-lg md:text-5xl font-bold mb-6 text-gray-900"></h1>
+                    <p id="product-description" class="text-base md:text-lg text-gray-600 mb-4"></p>
+                    
+                    <div id="product-rating" class="sm:flex items-center gap-2 text-yellow-500 mb-6">
+                        <!-- Rating content will be inserted here -->
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Creator Info -->
+                        <div class="flex items-center gap-3">
+                            <img src="{% static 'images/assets/icons/model-3.svg' %}" alt="Creator" class="w-11 h-11 rounded-full" />
+                            <p class="text-base text-gray-700">
+                                Created by 
+                                <a href="#" class="text-gray-700 hover:underline">Ronal Richards</a>
+                            </p>
+                        </div>
+
+                        <!-- Languages -->
+                        <div class="flex items-center gap-3">
+                            <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9"/>
+                            </svg>
+                            <p class="text-base text-gray-700">English, Spanish, Italian, German</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
+
+        <!-- Tabs Section -->
+        <div class="w-[90%] max-w-[1900px] mx-auto py-10">
+            <div class="lg:w-3/5">
+                <!-- Tabs -->
+                <div id="tabs" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+                    <button class="tab-btn px-8 py-4 rounded-lg font-normal border" data-tab="Description">Description</button>
+                    <button class="tab-btn px-8 py-4 rounded-lg font-normal border" data-tab="Instructor">Instructor</button>
+                    <button class="tab-btn px-8 py-4 rounded-lg font-normal border" data-tab="Syllabus">Syllabus</button>
+                    <button class="tab-btn px-8 py-4 rounded-lg font-normal border" data-tab="Reviews">Reviews</button>
+                </div>
+
+                <hr class="my-4"/>
+
+                <!-- Tab Content -->
+                <div id="tab-content" class="bg-white p-4 rounded-md">
+                    <!-- Dynamic content will appear here -->
+                </div>
+
+                <hr class="my-8"/>
+            </div>
+        </div>
+
+        <!-- Instructor & Syllabus Section -->
+        <div class="w-[90%] max-w-[1900px] mx-auto py-8">
+            <div class="lg:w-3/5">
+                <!-- Instructor Section -->
+                <div class="mb-10">
+                    <h2 class="text-xl font-semibold mb-4 text-[#0F172A]">Instructor</h2>
+                    <div class="gap-4 mb-8">
+                        <div class="mb-6">
+                            <h3 class="text-[#2563EB] text-xl font-semibold">Ronald Richards</h3>
+                            <p class="text-base text-[#334155] font-normal">UI/UX Designer</p>
+                        </div>
+                        <div class="sm:flex gap-4">
+                            <img src="{% static 'images/assets/icons/model-3.svg' %}" alt="Instructor" class="w-28 h-28 rounded-full object-cover" />
+                            <div class="flex flex-col gap-4 mt-2 text-sm text-gray-500">
+                                <span class="flex text-base font-normal text-[#0F172A] gap-1 items-center">
+                                    <img src="{% static 'images/assets/icons/award.svg' %}" alt="" /> 40,445 Reviews
+                                </span>
+                                <span class="flex text-base font-normal text-[#0F172A] gap-1 items-center">
+                                    <img src="{% static 'images/assets/icons/graduation.svg' %}" alt="" /> 500 Students
+                                </span>
+                                <span class="flex text-base font-normal text-[#0F172A] gap-1 items-center">
+                                    <img src="{% static 'images/assets/icons/play.svg' %}" alt="" /> 15 Courses
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-4 font-normal text-base text-[#334155]">
+                        With over a decade of industry experience, Ronald brings a wealth of practical knowledge to the classroom. He has played a pivotal role in designing user-centric 
+                        interfaces for renowned tech companies, ensuring seamless and engaging user experiences.
+                    </p>
+                </div>
+
+                <hr class="my-8" />
+
+                <!-- Syllabus Section -->
+                <div>
+                    <h2 class="text-xl font-semibold text-[#0F172A] mb-4">Syllabus</h2>
+                    <div class="bg-white border rounded-lg divide-y w-full lg:w-11/12" id="syllabus-container">
+                        <!-- JS will populate here -->
+                    </div>
+                </div>
+
+                <hr class="my-8 w-full" />
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="w-[90%] max-w-[1900px] mx-auto mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Learner Reviews</h2>
+
+            <div class="flex flex-col md:flex-row justify-between md:items-start gap-3">
+                <!-- Summary Ratings -->
+                <div class="lg:w-1/5 mb-6 sm:mb-0">
+                    <div class="flex items-center gap-2">
+                        <span class="flex items-center text-2xl font-medium">
+                            <img src="{% static 'images/assets/icons/star.svg' %}" alt="star" class="w-4 h-4" /> 4.6
+                        </span>
+                        <span class="text-sm text-gray-600">168,951 reviews</span>
+                    </div>
+
+                    <div class="space-y-2 mt-4">
+                        <!-- Rating bars -->
+                        <div class="flex items-center gap-2">
+                            <div class="flex">
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                            </div>
+                            <h5 class="text-sm text-gray-700">80%</h5>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex">
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                            </div>
+                            <h5 class="text-sm text-gray-700">10%</h5>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex">
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                            </div>
+                            <h5 class="text-sm text-gray-700">5%</h5>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex">
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                            </div>
+                            <h5 class="text-sm text-gray-700">3%</h5>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex">
+                                <img src="{% static 'images/assets/icons/star.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                                <img src="{% static 'images/assets/icons/emptystar.svg' %}" class="w-4 h-4" />
+                            </div>
+                            <h5 class="text-sm text-gray-700">2%</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-8">
+                    <!-- Reviews -->
+                    <div class="w-full md:w-4/5 space-y-4" id="reviewContainer"></div>
+                    <!-- Button -->
+                    <button onclick="toggleReviews()" id="toggleBtn" class="px-6 py-3 mt-8 border border-[#0F172A] text-sm font-medium rounded-md hover:bg-gray-100 transition">
+                        View more Reviews
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="bg-[#F8FAFC] py-12">
+            <div class="w-[90%] max-w-[1900px] mx-auto py-8">
+                <div class="sm:flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-semibold text-[#0F172A]">
+                        What Our Customers Say <br /> About Us
+                    </h2>
+                    <div class="flex items-center space-x-1 sm:space-x-2">
+                        <button onclick="prevSlide()" class="bg-[#94A3B8] sm:p-1.5 rounded hover:bg-[#CBD5E1]">
+                            <img src="{% static 'images/assets/icons/leftarrow.svg' %}" alt="Left" />
+                        </button>
+                        <button onclick="nextSlide()" class="bg-[#94A3B8] sm:p-1.5 rounded hover:bg-[#CBD5E1]">
+                            <img src="{% static 'images/assets/icons/rightarrow.svg' %}" alt="Right" />
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden w-full">
+                    <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Courses Section -->
+        <div id="top-courses" class="w-[90%] max-w-[1900px] mx-auto py-8">
+            <div class="sm:flex justify-between items-center mb-4">
+                <h2 id="course-title" class="text-2xl font-semibold text-[#0F172A]">Top Courses</h2>
+                <button id="toggle-btn" class="text-sm text-blue-500 hover:underline">
+                    See All
+                </button>
+            </div>
+
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 hidden">
+            </div>
+
+            <!-- Error State -->
+            <div id="courses-error" class="text-center py-8 hidden">
+                <p class="text-red-500">Failed to load courses. Please try again later.</p>
+                <button id="retry-btn" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Retry
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer section-->
+<footer class="w-full bg-[#1E293B] text-white py-10">
+  <div class="container mx-auto px-4 md:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+
+      <!-- Logo and Description -->
+      <div class="flex flex-col space-y-4">
+        <div class="flex items-center">
+          <div class="w-6 h-6">
+            <img src="{% static 'images/assets/logo.svg' %}" alt="logo" />
+          </div>
+          <span class="ml-2 text-xl font-bold">
+            <a href="#" class="flex items-center justify-center">Byway</a>
+          </span>
+        </div>
+        <p class="text-sm font-normal text-[#CBD5E1]">
+          Empowering learners through accessible and engaging online education.
+        </p>
+        <p class="text-sm font-normal text-[#CBD5E1]">
+          Byway is a leading online learning platform dedicated to providing high-quality, flexible, and affordable educational experiences.
+        </p>
+      </div>
+
+      <!-- Get Help Section -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-[#F1F5F9]">Get Help</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Contact Us</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Latest Articles</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Programs Section -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-[#F1F5F9]">Programs</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Art & Design</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Business</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">IT & Software</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Languages</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Programming</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Us Section -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-[#F1F5F9]">Contact Us</h3>
+        <ul class="space-y-2 text-sm font-medium text-[#CBD5E1]">
+          <li>Address: 123 Main Street, Anytown, CA 12345</li>
+          <li>Tel: <a href="#" class="hover:text-blue-400 hover:underline">(123) 456-7890</a></li>
+          <li>Email: <a href="mailto:byway@contact.in" class="hover:text-blue-400 hover:underline">byway@contact.in</a></li>
+        </ul>
+
+        <!-- Social Media Icons -->
+        <div class="flex mt-4 space-x-4">
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our Facebook page">
+                <img 
+                    src="{% static 'images/assets/icons/facebook.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/Facebook.svg' %}" 
+                    alt="Facebook" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our GitHub repository">
+                <img 
+                    src="{% static 'images/assets/icons/github.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/GitHub.svg' %}" 
+                    alt="GitHub" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our Google page">
+                <img 
+                    src="{% static 'images/assets/icons/google.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/Google.svg' %}" 
+                    alt="Google" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our Twitter page">
+                <img 
+                    src="{% static 'images/assets/icons/twitter.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/Twitter.svg' %}" 
+                    alt="Twitter" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our Microsoft page">
+                <img 
+                    src="{% static 'images/assets/icons/microsoft.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/Microsoft.svg' %}" 
+                    alt="Microsoft" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+    <script>
+        //footer
+        document.addEventListener('DOMContentLoaded', function() {
+    const socialIcons = document.querySelectorAll('.social-icon');
+    
+    socialIcons.forEach(icon => {
+        const originalSrc = icon.src;
+        const hoverSrc = icon.dataset.hover;
+        
+        // Store original source
+        icon.dataset.original = originalSrc;
+        
+        // Add hover event listeners
+        icon.parentElement.addEventListener('mouseenter', function() {
+            if (hoverSrc) {
+                icon.src = hoverSrc;
+            }
+        });
+        
+        icon.parentElement.addEventListener('mouseleave', function() {
+            icon.src = icon.dataset.original;
+        });
+    });
+});
+        // ===================================
+// PRODUCTS/COURSES MANAGEMENT
+// ===================================
+
+class ProductManager {
+    constructor() {
+        this.products = [];
+        this.showAll = false;
+        this.initializeElements();
+        this.attachEventListeners();
+        this.initialize();
+    }
+
+    initializeElements() {
+        this.elements = {
+            productsGrid: document.getElementById('products-grid'),
+            toggleBtn: document.getElementById('toggle-btn'),
+            loading: document.getElementById('loading'),
+            error: document.getElementById('error'),
+            courseTitle: document.getElementById('course-title'),
+            retryBtn: document.getElementById('retry-btn')
+        };
+    }
+
+    attachEventListeners() {
+        if (this.elements.toggleBtn) {
+            this.elements.toggleBtn.addEventListener('click', () => this.toggleShowAll());
+        }
+        if (this.elements.retryBtn) {
+            this.elements.retryBtn.addEventListener('click', () => this.fetchProducts());
+        }
+    }
+
+    generateStars(rating, count) {
+        const fullStars = Math.round(rating);
+        const emptyStars = 5 - fullStars;
+        const stars = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+        
+        return `
+            <div class="flex items-center text-yellow-500 mt-1">
+                <span>${stars}</span>
+                <span class="text-[#334155] text-xs font-semibold ml-1">
+                    (${count} Ratings)
+                </span>
+            </div>
+        `;
+    }
+
+    createProductCard(product) {
+        const truncatedTitle = product.title.length > 40 
+            ? product.title.slice(0, 40) + '...' 
+            : product.title;
+
+        return `
+            <div class="block" onclick="productManager.handleProductClick(event, ${product.id})">
+                <div class="bg-white border border-gray-300 shadow-[0_0_8px_0_#3B82F61F] rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
+                    <img
+                        src="${product.image}"
+                        alt="${product.title}"
+                        class="w-full h-48 object-contain p-4"
+                        loading="lazy"
+                        onerror="this.src='https://via.placeholder.com/200x200?text=No+Image'"
+                    />
+                    <div class="px-4 pb-4">
+                        <h3 class="font-semibold text-lg text-[#0F172A] leading-tight mt-2">
+                            ${truncatedTitle}
+                        </h3>
+                        <p class="text-sm font-normal text-[#334155]">By Ronald Richards</p>
+                        ${this.generateStars(product.rating.rate, product.rating.count)}
+                        <p class="text-sm font-normal text-[#334155] mt-1">
+                            22 Total Hours. 155 Lectures. Beginner
+                        </p>
+                        <p class="text-xl font-bold text-[#0F172A] mt-2">$${product.price}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    renderProducts() {
+        if (!this.elements.productsGrid) return;
+        
+        const visibleProducts = this.showAll ? this.products : this.products.slice(0, 4);
+        this.elements.productsGrid.innerHTML = visibleProducts.map(product => this.createProductCard(product)).join('');
+        
+        if (this.elements.toggleBtn) {
+            this.elements.toggleBtn.textContent = this.showAll ? 'See Less' : 'See All';
+        }
+    }
+
+    async fetchProducts() {
+        try {
+            console.log('Starting to fetch products...');
+            this.showLoading();
+            
+            const response = await fetch('https://fakestoreapi.com/products');
+            console.log('Response status:', response.status);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            this.products = await response.json();
+            console.log('Products loaded:', this.products.length);
+            
+            this.showContent();
+            this.renderProducts();
+            
+        } catch (err) {
+            console.error('Error fetching products:', err);
+            this.showError();
+        }
+    }
+
+    showLoading() {
+        if (this.elements.loading) this.elements.loading.classList.remove('hidden');
+        if (this.elements.error) this.elements.error.classList.add('hidden');
+        if (this.elements.productsGrid) this.elements.productsGrid.classList.add('hidden');
+    }
+
+    showContent() {
+        if (this.elements.loading) this.elements.loading.classList.add('hidden');
+        if (this.elements.productsGrid) this.elements.productsGrid.classList.remove('hidden');
+    }
+
+    showError() {
+        if (this.elements.loading) this.elements.loading.classList.add('hidden');
+        if (this.elements.error) this.elements.error.classList.remove('hidden');
+        if (this.elements.productsGrid) this.elements.productsGrid.classList.add('hidden');
+    }
+
+    toggleShowAll() {
+        this.showAll = !this.showAll;
+        this.renderProducts();
+    }
+
+    handleProductClick(event, productId) {
+        event.preventDefault();
+        window.location.href = `/product/?id=${productId}`;
+    }
+
+    initialize(title = 'Top Courses', className = '') {
+        console.log('Initializing ProductManager...');
+        
+        if (title !== 'Top Courses' && this.elements.courseTitle) {
+            this.elements.courseTitle.textContent = title;
+        }
+        
+        if (className) {
+            const topCourses = document.getElementById('top-courses');
+            if (topCourses) {
+                topCourses.className += ' ' + className;
+            }
+        }
+        
+        this.fetchProducts();
+    }
+}
+
+// ===================================
+// TESTIMONIALS CAROUSEL
+// ===================================
+
+class TestimonialCarousel {
+    constructor() {
+        this.testimonials = [
+            {
+                id: '1',
+                name: 'Jane Doe',
+                role: 'Designer',
+                message: "Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.",
+                image: '/static/images/testimonials/jane.svg'
+            },
+            {
+                id: '2',
+                name: 'John Smith',
+                role: 'Developer',
+                message: "Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.",
+                image: '/static/images/testimonials/jane.svg'
+            },
+            {
+                id: '3',
+                name: 'Alice Johnson',
+                role: 'Engineer',
+                message: "Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.",
+                image: '/static/images/testimonials/jane.svg'
+            },
+            {
+                id: '4',
+                name: 'Mike Lee',
+                role: 'Tech Lead',
+                message: 'Top-quality content for skill development.',
+                image: '/static/images/testimonials/jane.svg'
+            },
+            {
+                id: '5',
+                name: 'Sara Park',
+                role: 'UX Designer',
+                message: "Byway's tech courses are top-notch! As someone who's always looking to stay ahead in the rapidly evolving tech world, I appreciate the up-to-date content and engaging multimedia.",
+                image: '/static/images/testimonials/jane.svg'
+            },
+            {
+                id: '6',
+                name: 'John Smith',
+                role: 'Developer',
+                message: 'Great for staying competitive in tech.',
+                image: '/static/images/testimonials/jane.svg'
+            }
+        ];
+
+        this.currentIndex = 0;
+        this.visibleCards = 3;
+        this.initialize();
+    }
+
+    initialize() {
+        this.updateVisibleCards();
+        window.addEventListener('resize', () => this.updateVisibleCards());
+    }
+
+    updateVisibleCards() {
+        const width = window.innerWidth;
+        this.visibleCards = width < 768 ? 1 : width < 980 ? 2 : 3;
+        this.renderTestimonials();
+    }
+
+    renderTestimonials() {
+        const track = document.getElementById('testimonial-track');
+        if (!track) return;
+
+        const trackWidth = (this.testimonials.length * 100) / this.visibleCards;
+        const itemWidth = 100 / this.testimonials.length;
+        const translateX = `-${itemWidth * this.currentIndex}%`;
+
+        track.style.width = `${trackWidth}%`;
+        track.style.transform = `translateX(${translateX})`;
+
+        track.innerHTML = this.testimonials.map(t => `
+            <div class="px-2 my-4 shrink-0" style="width: ${itemWidth}%">
+                <div class="bg-white shadow-[0_0_3px_0.5px_#3B82F61F] rounded-xl p-4 h-full flex flex-col justify-between">
+                    <div class="text-blue-500 text-2xl mb-2 py-4">
+                        <img src="/static/images/assets/icons/quotes.svg" alt="Quote" class="w-10 h-10" />
+                    </div>
+                    <p class="text-base font-normal text-black mb-4 max-w-screen-xl w-full sm:w-11/12 md:w-4/5 lg:w-5/6 xl:w-4/5">
+                        ${t.message}
+                    </p>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <img src="${t.image}" alt="${t.name}" class="w-16 h-16 rounded-full object-cover" />
+                        <div>
+                            <p class="text-lg font-semibold text-black">${t.name}</p>
+                            <p class="text-sm font-normal text-[#334155]">${t.role}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    nextSlide() {
+        const maxIndex = this.testimonials.length - this.visibleCards;
+        this.currentIndex = this.currentIndex + 1 > maxIndex ? 0 : this.currentIndex + 1;
+        this.renderTestimonials();
+    }
+
+    prevSlide() {
+        const maxIndex = this.testimonials.length - this.visibleCards;
+        this.currentIndex = this.currentIndex - 1 < 0 ? maxIndex : this.currentIndex - 1;
+        this.renderTestimonials();
+    }
+}
+
+// ===================================
+// REVIEWS MANAGEMENT
+// ===================================
+
+class ReviewManager {
+    constructor() {
+        this.reviews = [
+            {
+                name: "Mark Doe",
+                rating: 5,
+                date: "22nd March, 2024",
+                comment: "I was initially apprehensive, having no prior design experience. But the instructor, John Doe, did an amazing job of breaking down complex concepts into easily digestible modules. The video lectures were engaging, and the real-world examples really helped solidify my understanding.",
+                avatar: "{% static 'images/assets/icons/model-4.png' %}"
+            },
+            {
+                name: "Anna Smith",
+                rating: 4,
+                date: "15th April, 2024",
+                comment: "I was initially apprehensive, having no prior design experience. But the instructor, John Doe, did an amazing job of breaking down complex concepts into easily digestible modules. The video lectures were engaging, and the real-world examples really helped solidify my understanding.",
+                avatar: "{% static 'images/assets/icons/model-4.png' %}"
+            },
+            {
+                name: "John Lee",
+                rating: 5,
+                date: "10th May, 2024",
+                comment: "I was initially apprehensive, having no prior design experience. But the instructor, John Doe, did an amazing job of breaking down complex concepts into easily digestible modules. The video lectures were engaging, and the real-world examples really helped solidify my understanding.",
+                avatar: "{% static 'images/assets/icons/model-4.png' %}"
+            },
+            {
+                name: "Emily Carter",
+                rating: 5,
+                date: "1st June, 2024",
+                comment: "I was initially apprehensive, having no prior design experience. But the instructor, John Doe, did an amazing job of breaking down complex concepts into easily digestible modules. The video lectures were engaging, and the real-world examples really helped solidify my understanding.",
+                avatar: "{% static 'images/assets/icons/model-4.png' %}"
+            }
+        ];
+
+        this.showAll = false;
+        this.renderReviews();
+    }
+
+    renderReviews() {
+        const container = document.getElementById('reviewContainer');
+        if (!container) return;
+
+        const visibleReviews = this.showAll ? this.reviews : this.reviews.slice(0, 3);
+        container.innerHTML = visibleReviews.map(review => `
+            <div class="bg-white p-4 rounded-lg shadow-sm border">
+                <div class="sm:flex justify-between gap-4 mb-2">
+                    <div class="flex items-center gap-4">
+                        <img src="${review.avatar}" alt="${review.name}" class="w-14 h-14 rounded-full object-cover"/>
+                        <p class="font-semibold text-lg text-[#0F172A]">${review.name}</p>
+                    </div>
+                    <div class="sm:w-4/6">
+                        <div class="text-lg text-[#0F172A] font-semibold flex items-center gap-8 mb-3">
+                            <div class="flex items-center gap-1">
+                                <img src="{% static 'images/assets/icons/star.svg' %}" alt="star" class="w-5 h-5" />
+                                <p class="text-lg">${review.rating}</p>
+                            </div>
+                            <p class="text-sm text-[#334155]">Reviewed on ${review.date}</p>
+                        </div>
+                        <p class="text-base text-[#334155]">${review.comment}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    toggleReviews() {
+        this.showAll = !this.showAll;
+        this.renderReviews();
+        const toggleBtn = document.getElementById('toggleBtn');
+        if (toggleBtn) {
+            toggleBtn.innerText = this.showAll ? 'Show less' : 'View more Reviews';
+        }
+    }
+}
+
+// ===================================
+// PRODUCT DETAIL PAGE
+// ===================================
+
+class ProductDetailManager {
+    constructor() {
+        this.initialize();
+    }
+
+    getProductId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id') || '1';
+    }
+
+    calculateOriginalPrice(discountedPrice) {
+        return (discountedPrice * 2).toFixed(2);
+    }
+
+    generateStarRating(rating) {
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+        
+        let starsHtml = '';
+        for (let i = 0; i < fullStars; i++) {
+            starsHtml += '<span class="text-yellow-400">★</span>';
+        }
+        if (halfStar) {
+            starsHtml += '<span class="text-yellow-400">☆</span>';
+        }
+        for (let i = 0; i < emptyStars; i++) {
+            starsHtml += '<span class="text-gray-300">☆</span>';
+        }
+        return starsHtml;
+    }
+
+    createProductCard(product) {
+        // const originalPrice = this.calculateOriginalPrice(product.price);
+        // const discountedPrice = product.price.toFixed(2);
+        const originalPrice = product.price.toFixed(2); // Original price from API
+        const discountedPrice = (product.price * 0.5).toFixed(2); // 50% off
+        
+        return `
+            <div class="w-full xl:w-[120%]">
+                <div class="bg-white shadow-lg rounded-lg w-full">
+                    <div class="p-4">
+                        <img
+                            src="${product.image}"
+                            alt="${product.title}"
+                            class="w-full max-w-sm mx-auto mb-4 object-contain h-64"
+                            onerror="this.src='/api/placeholder/300/300'"
+                        />
+                        <div class="mt-4 space-y-3">
+                            <div class="text-2xl font-semibold text-gray-900">
+                                $${discountedPrice}
+                                <span class="ml-2 line-through text-gray-400">$${originalPrice}</span>
+                                <span class="ml-2 text-green-600 text-xl font-medium">50% Off</span>
+                            </div>
+
+                            <button onclick="productDetailManager.addToCart('${product.id}')" class="w-full bg-gray-900 text-sm font-medium text-white py-4 rounded-lg hover:bg-gray-800 transition">
+                                Add To Cart
+                            </button>
+                            <button onclick="productDetailManager.buyNow('${product.id}')" class="w-full border border-gray-900 text-sm font-medium text-gray-900 py-4 rounded hover:bg-gray-100 transition">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="p-4">
+                        <h4 class="text-xl font-medium text-gray-900 mb-2">Share</h4>
+                        <div class="flex justify-around mb-4">
+                            ${['Facebook', 'GitHub', 'Google', 'Twitter', 'Microsoft'].map(platform => `
+                                <button onclick="productDetailManager.shareProduct('${platform}', '${product.title}')" class="bg-gray-100 rounded-full p-1 hover:scale-105 transition" aria-label="Share on ${platform}">
+                                    <img
+                                        src="/static/images/assets/icons/${platform}.svg"
+                                        alt="${platform}"
+                                        class="h-12 w-12 bg-white rounded-full p-2" />
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    async loadProduct() {
+        try {
+            const productId = this.getProductId();
+            const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
+            const product = await response.json();
+
+            // Update UI elements
+            const loading = document.getElementById('loading');
+            const mainContent = document.getElementById('main-content');
+            
+            if (loading) loading.classList.add('hidden');
+            if (mainContent) mainContent.classList.remove('hidden');
+
+            // Update page content
+            this.updatePageContent(product);
+
+        } catch (error) {
+            console.error('Error loading product:', error);
+            this.showError();
+        }
+    }
+
+    updatePageContent(product) {
+        // Update breadcrumb and title
+        const breadcrumbTitle = document.getElementById('breadcrumb-title');
+        const productTitle = document.getElementById('product-title');
+        const productDescription = document.getElementById('product-description');
+
+        if (breadcrumbTitle) breadcrumbTitle.textContent = product.title;
+        if (productTitle) productTitle.textContent = product.title;
+        if (productDescription) productDescription.textContent = product.description;
+
+        // Update rating
+        const productRating = document.getElementById('product-rating');
+        if (productRating) {
+            productRating.innerHTML = `
+                <span class="text-yellow-500 text-lg font-semibold ml-1">${product.rating.rate}</span>
+                ${this.generateStarRating(product.rating.rate)}
+                <span class="text-gray-600 ml-2">(${product.rating.count} Rating)</span>
+                <span class="w-px h-4 bg-gray-600 mx-2"></span>
+                <span class="text-gray-600">22 Total Hours. 155 Lectures. All levels</span>
+            `;
+        }
+
+        // Create product cards
+        const productCardHtml = this.createProductCard(product);
+        const desktopCard = document.getElementById('desktop-product-card');
+        const mobileCard = document.getElementById('mobile-product-card');
+
+        if (desktopCard) desktopCard.innerHTML = productCardHtml;
+        if (mobileCard) mobileCard.innerHTML = productCardHtml;
+    }
+
+    showError() {
+        const loading = document.getElementById('loading');
+        if (loading) {
+            loading.innerHTML = `
+                <div class="text-center">
+                    <p class="text-red-600 mb-4">Error loading product. Please try again.</p>
+                    <button onclick="productDetailManager.loadProduct()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        Retry
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    addToCart(productId) {
+        alert(`Product ${productId} added to cart!`);
+        // Implement cart functionality here
+    }
+
+    buyNow(productId) {
+        alert(`Buy Now clicked for product ${productId}!`);
+        // Implement checkout functionality here
+    }
+
+    shareProduct(platform, productTitle) {
+        const url = window.location.href;
+        const text = `Check out this amazing product: ${productTitle}`;
+        
+        const shareUrls = {
+            'Facebook': `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+            'Twitter': `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+            'Google': `https://plus.google.com/share?url=${encodeURIComponent(url)}`
+        };
+
+        if (shareUrls[platform]) {
+            window.open(shareUrls[platform]);
+        } else {
+            alert(`${platform} sharing - this would typically integrate with ${platform} services`);
+        }
+    }
+
+    changeProduct(id) {
+        const url = new URL(window.location);
+        url.searchParams.set('id', id);
+        window.history.pushState({}, '', url);
+        this.loadProduct();
+    }
+
+    initialize() {
+        this.loadProduct();
+    }
+}
+
+// ===================================
+// TAB MANAGEMENT
+// ===================================
+
+class TabManager {
+    constructor() {
+        this.tabs = document.querySelectorAll('.tab-btn');
+        this.contentDiv = document.getElementById('tab-content');
+        
+        this.tabContent = {
+            Description: `
+                <h2 class="font-semibold text-xl text-[#0F172A] mb-2">Course Description</h2>
+                <p class="text-[#334155] text-base font-normal mb-4">
+                This interactive e-learning course will introduce you to User Experience (UX) design, the art of creating products and services that are 
+                intuitive, enjoyable, and user-friendly. Gain a solid foundation in UX principles and learn to apply them in real-world scenarios through engaging modules and interactive exercises. 
+                </p>
+                <h2 class="font-semibold text-xl text-[#0F172A] mb-2">Certification</h2>
+                <p class="text-[#334155] text-base font-normal mb-4">
+                At Byway, we understand the significance of formal recognition for your hard work and dedication to continuous learning. Upon successful
+                completion of our courses, you will earn a prestigious certification that not only validates your expertise but also opens doors to new opportunities in your chosen field.
+                </p>
+            `,
+            Instructor: `<p class="text-gray-500">Instructor content coming soon.</p>`,
+            Syllabus: `<p class="text-gray-500">Syllabus content coming soon.</p>`,
+            Reviews: `<p class="text-gray-500">Reviews content coming soon.</p>`
+        };
+
+        this.initialize();
+    }
+
+    initialize() {
+        this.tabs.forEach(tab => {
+            tab.addEventListener('click', () => this.setActiveTab(tab.dataset.tab));
+        });
+        this.setActiveTab('Description');
+    }
+
+    setActiveTab(tabName) {
+        this.tabs.forEach(tab => {
+            if (tab.dataset.tab === tabName) {
+                tab.classList.add('bg-[#EFF6FF]', 'text-black');
+                tab.classList.remove('text-[#0F172A]', 'border');
+            } else {
+                tab.classList.remove('bg-[#EFF6FF]', 'text-black');
+                tab.classList.add('text-[#0F172A]', 'border');
+            }
+        });
+
+        if (this.contentDiv) {
+            this.contentDiv.innerHTML = this.tabContent[tabName];
+        }
+    }
+}
+
+// ===================================
+// SYLLABUS MANAGEMENT
+// ===================================
+
+class SyllabusManager {
+    constructor() {
+        this.syllabusData = [
+            {
+                title: 'Introduction to UX Design',
+                lessons: 5,
+                duration: '1 hour',
+                content: ['What is UX?', 'History of UX', 'Why UX Matters', 'UX vs UI', 'Career Paths']
+            },
+            {
+                title: 'Basics of User-Centered Design',
+                lessons: 5,
+                duration: '1 hour',
+                content: ['Understanding Users', 'Personas', 'Empathy Mapping', 'User Journeys', 'Accessibility']
+            },
+            {
+                title: 'Elements of User Experience',
+                lessons: 5,
+                duration: '1 hour',
+                content: ['Information Architecture', 'Interaction Design', 'Usability', 'Prototyping', 'Wireframing']
+            },
+            {
+                title: 'Visual Design Principles',
+                lessons: 5,
+                duration: '1 hour',
+                content: ['Typography', 'Color Theory', 'Layouts', 'Visual Hierarchy', 'Design Systems']
+            }
+        ];
+
+        this.activeIndex = 0;
+        this.container = document.getElementById("syllabus-container");
+        this.renderSyllabus();
+    }
+
+    renderSyllabus() {
+        if (!this.container) return;
+
+        this.container.innerHTML = this.syllabusData.map((item, index) => `
+            <div>
+                <button onclick="syllabusManager.toggleSection(${index})" class="w-full flex justify-between items-center p-6 hover:bg-gray-50">
+                    <div class="flex sm:items-center gap-4">
+                        <span class="icon">
+                            ${this.activeIndex === index
+                                ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"></path></svg>'
+                                : '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>'}
+                        </span>
+                        <p class="sm:text-xl font-semibold text-[#0F172A]">${item.title}</p>
+                    </div>
+                    <div class="text-left flex justify-between">
+                        <p class="hidden sm:inline-block text-sm text-gray-500">${item.lessons} Lessons · ${item.duration}</p>
+                    </div>
+                </button>
+                ${this.activeIndex === index ? `
+                    <ul class="px-6 pb-4 text-base text-black-600 space-y-1">
+                        ${item.content.map(lesson => `<li>• ${lesson}</li>`).join('')}
+                    </ul>
+                ` : ''}
+            </div>
+        `).join('');
+    }
+
+    toggleSection(index) {
+        this.activeIndex = (this.activeIndex === index) ? null : index;
+        this.renderSyllabus();
+    }
+}
+
+// ===================================
+// APPLICATION INITIALIZATION
+// ===================================
+
+// Global instances
+let productManager;
+let testimonialCarousel;
+let reviewManager;
+let productDetailManager;
+let tabManager;
+let syllabusManager;
+
+// Initialize application
+function initializeApp() {
+    // Initialize components based on what's available on the page
+    if (document.getElementById('products-grid')) {
+        productManager = new ProductManager();
+    }
+    
+    if (document.getElementById('testimonial-track')) {
+        testimonialCarousel = new TestimonialCarousel();
+    }
+    
+    if (document.getElementById('reviewContainer')) {
+        reviewManager = new ReviewManager();
+    }
+    
+    if (document.getElementById('main-content')) {
+        productDetailManager = new ProductDetailManager();
+    }
+    
+    if (document.querySelectorAll('.tab-btn').length > 0) {
+        tabManager = new TabManager();
+    }
+    
+    if (document.getElementById('syllabus-container')) {
+        syllabusManager = new SyllabusManager();
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
+}
+
+// Fallback initialization
+setTimeout(() => {
+    if (!productManager && document.getElementById('products-grid')) {
+        console.log('Fallback initialization...');
+        initializeApp();
+    }
+}, 1000);
+    </script>
+
+
+</body>
+</html>

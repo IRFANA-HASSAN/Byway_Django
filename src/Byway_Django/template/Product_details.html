@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+
+  <!-- External Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+      <!-- Navbar -->
+    <nav class="py-4 border-b relative bg-white" role="navigation" aria-label="Main navigation">
+      <div class="flex justify-between items-center w-[90%] max-w-[1900px] mx-auto">
+        <div class="flex items-center space-x-2">
+          <img src="{% static 'images/assets/logo.svg' %}" alt="Byway Logo" class="w-8 h-8" />
+          <span class="text-xl font-bold"><a href="/" class="hover:text-blue-600 transition">Byway</a></span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="px-4 py-2 text-sm border border-gray-600 text-gray-600 hover:bg-gray-100 transition rounded" aria-label="Log in to your account">Log In</button>
+          <button class="px-4 py-2 text-sm bg-gray-800 text-white hover:bg-blue-700 transition rounded" aria-label="Create a new account">Sign Up</button>
+        </div>
+      </div>
+    </nav>
+{% block content %}
+<div class="w-[90%] max-w-[1900px] mx-auto my-12">
+  <h2 class="text-3xl font-bold text-gray-800 mb-6">{{ category.title }} - Courses</h2>
+  {% if cards %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {% for card in cards %}
+        <div class="bg-white p-4 rounded-lg shadow hover:shadow-xl transition">
+          {% if card.image %}
+            <img src="{{ card.image.url }}" alt="{{ card.title }}" class="w-full h-40 object-cover rounded mb-4">
+          {% endif %}
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ card.title }}</h3>
+          <p class="text-sm text-gray-600 mb-4">{{ card.description }}</p>
+          {% if card.link %}
+            <a href="{{ card.link }}" target="_blank" class="text-blue-600 hover:underline text-sm">View Course</a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-gray-500 text-center py-12">No courses found in this category.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+   <!--Footer section-->
+<footer class="w-full bg-[#1E293B] text-white py-10">
+  <div class="container mx-auto px-4 md:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+
+      <!-- Logo and Description -->
+      <div class="flex flex-col space-y-4">
+        <div class="flex items-center">
+          <div class="w-6 h-6">
+            <img src="{% static 'images/assets/logo.svg' %}" alt="logo" />
+          </div>
+          <span class="ml-2 text-xl font-bold">
+            <a href="#" class="flex items-center justify-center">Byway</a>
+          </span>
+        </div>
+        <p class="text-sm font-normal text-[#CBD5E1]">
+          Empowering learners through accessible and engaging online education.
+        </p>
+        <p class="text-sm font-normal text-[#CBD5E1]">
+          Byway is a leading online learning platform dedicated to providing high-quality, flexible, and affordable educational experiences.
+        </p>
+      </div>
+
+      <!-- Get Help Section -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-[#F1F5F9]">Get Help</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Contact Us</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Latest Articles</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Programs Section -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-[#F1F5F9]">Programs</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Art & Design</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Business</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">IT & Software</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Languages</a></li>
+          <li><a href="#" class="text-sm font-medium text-[#CBD5E1] hover:text-blue-400 hover:underline">Programming</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Us Section -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-[#F1F5F9]">Contact Us</h3>
+        <ul class="space-y-2 text-sm font-medium text-[#CBD5E1]">
+          <li>Address: 123 Main Street, Anytown, CA 12345</li>
+          <li>Tel: <a href="#" class="hover:text-blue-400 hover:underline">(123) 456-7890</a></li>
+          <li>Email: <a href="mailto:byway@contact.in" class="hover:text-blue-400 hover:underline">byway@contact.in</a></li>
+        </ul>
+
+        <!-- Social Media Icons -->
+        <div class="flex mt-4 space-x-4">
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our Facebook page">
+                <img 
+                    src="{% static 'images/assets/icons/facebook.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/Facebook.svg' %}" 
+                    alt="Facebook" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our GitHub repository">
+                <img 
+                    src="{% static 'images/assets/icons/github.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/GitHub.svg' %}" 
+                    alt="GitHub" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our Google page">
+                <img 
+                    src="{% static 'images/assets/icons/google.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/Google.svg' %}" 
+                    alt="Google" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our Twitter page">
+                <img 
+                    src="{% static 'images/assets/icons/twitter.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/Twitter.svg' %}" 
+                    alt="Twitter" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+            <a href="#" class="bg-white rounded-full p-2 hover:bg-blue-100 transition" aria-label="Visit our Microsoft page">
+                <img 
+                    src="{% static 'images/assets/icons/microsoft.svg' %}" 
+                    data-hover="{% static 'images/assets/icons/Microsoft.svg' %}" 
+                    alt="Microsoft" 
+                    class="w-8 h-8 social-icon grayscale hover:grayscale-0 transition-all duration-300" />
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+      //footer
+        document.addEventListener('DOMContentLoaded', function() {
+    const socialIcons = document.querySelectorAll('.social-icon');
+    
+    socialIcons.forEach(icon => {
+        const originalSrc = icon.src;
+        const hoverSrc = icon.dataset.hover;
+        
+        // Store original source
+        icon.dataset.original = originalSrc;
+        
+        // Add hover event listeners
+        icon.parentElement.addEventListener('mouseenter', function() {
+            if (hoverSrc) {
+                icon.src = hoverSrc;
+            }
+        });
+        
+        icon.parentElement.addEventListener('mouseleave', function() {
+            icon.src = icon.dataset.original;
+        });
+    });
+});
+</script>
+
+</body>
+</html>
