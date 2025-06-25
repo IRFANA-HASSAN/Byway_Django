@@ -29,23 +29,25 @@ class CourseManager {
     const title = course.title.length > 40 ? course.title.slice(0, 40) + '...' : course.title;
 
     return `
-      <a href="/product/?id=${course.id}" class="block">
-        <div class="bg-white border border-gray-300 product-card rounded-xl overflow-hidden hover:shadow-lg transition">
-          <img src="${course.image}" alt="${course.title}" class="w-full h-48 object-contain p-4" />
-          <div class="px-4 pb-4">
-            <h3 class="font-semibold text-lg text-gray-900 leading-tight mt-2">${title}</h3>
-            <p class="text-sm font-normal text-gray-600">By Ronald Richards</p>
-            <div class="flex items-center text-yellow-500 mt-1">
-              ${stars}
-              <span class="text-gray-600 text-xs font-semibold ml-1">
-                (${course.rating.count} Ratings)
-              </span>
-            </div>
-            <p class="text-sm font-normal text-gray-600 mt-1">22 Total Hours. 155 Lectures. Beginner</p>
-            <p class="text-xl font-bold text-gray-900 mt-2">$${course.price}</p>
+      <a href="/product/?id=${course.id}" class="block h-full">
+    <div class="bg-white border border-gray-300 product-card rounded-xl overflow-hidden hover:shadow-lg transition flex flex-col h-full">
+      <img src="${course.image}" alt="${course.title}" class="w-full h-48 object-contain p-4" />
+      <div class="px-4 pb-4 flex-grow flex flex-col justify-between">
+        <div>
+          <h3 class="font-semibold text-lg text-gray-900 leading-tight mt-2">${title}</h3>
+          <p class="text-sm font-normal text-gray-600">By Ronald Richards</p>
+          <div class="flex items-center text-yellow-500 mt-1">
+            ${stars}
+            <span class="text-gray-600 text-xs font-semibold ml-1">
+              (${course.rating.count} Ratings)
+            </span>
           </div>
+          <p class="text-sm font-normal text-gray-600 mt-1">22 Total Hours. 155 Lectures. Beginner</p>
         </div>
-      </a>
+        <p class="text-xl font-bold text-gray-900 mt-2">$${course.price}</p>
+      </div>
+    </div>
+  </a>
     `;
   }
 

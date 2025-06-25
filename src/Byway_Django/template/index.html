@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Byway - The Learning Platform for Online Education. Access high-quality courses, expert instructors, and transform your career.">
   <title>Byway Django || The Learning Platform</title>
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="{% static 'images/assets/logo.svg' %}">
   
   <!-- External CSS -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -51,18 +52,20 @@
     <nav class="py-4 border-b relative bg-white" role="navigation" aria-label="Main navigation">
       <div class="flex justify-between items-center w-[90%] max-w-[1900px] mx-auto">
         <div class="flex items-center space-x-2">
-          <img src="{% static 'images/assets/logo.svg' %}" alt="Byway Logo" class="w-8 h-8" />
-          <span class="text-xl font-bold"><a href="/" class="hover:text-blue-600 transition">Byway</a></span>
+          <img src="{% static 'images/assets/logo.svg' %}" alt="Byway Logo" class="w-11 h-11" />
+          <span class="text-2xl font-normal"><a href="/" class="hover:text-blue-600 transition">Byway</a></span>
         </div>
         <div class="flex items-center gap-3">
-          <button class="px-4 py-2 text-sm border border-gray-600 text-gray-600 hover:bg-gray-100 transition rounded" aria-label="Log in to your account">Log In</button>
-          <button class="px-4 py-2 text-sm bg-gray-800 text-white hover:bg-blue-700 transition rounded" aria-label="Create a new account">Sign Up</button>
+
+        <a href="#"><img src="{% static 'images/assets/icons/cart.svg' %}" alt="cart" class="h-8 w-8 hidden sm:inline-block" /></a>
+          <button class="px-6 py-4 text-base border border-gray-600 text-gray-600 hover:bg-gray-100 transition rounded-sm" aria-label="Log in to your account">Log In</button>
+          <button class="px-6 py-4 text-base bg-gray-800 text-white hover:bg-blue-700 transition rounded-sm" aria-label="Create a new account">Sign Up</button>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="flex justify-between items-center w-[90%] max-w-[1900px] mx-auto py-12" aria-label="Hero section">
+    <section class="flex justify-between items-center w-[90%] max-w-[1900px] mx-auto py-12 lg:py-4" aria-label="Hero section">
       <div class="my-28 xl:my-6">
         <h1 class="text-2xl sm:text-4xl font-bold mb-4 text-gray-900">
           Unlock Your Potential <br /> with Byway
@@ -75,7 +78,7 @@
           Start your instructor journey
         </button>
       </div>
-      <div class="hero-image hidden md:inline-block md:h-[500px] md:w-full lg:h-[800px] lg:w-[1000px] bg-no-repeat bg-contain bg-right" aria-hidden="true"></div>
+      <div class="hero-image hidden md:inline-block md:h-[300px] md:w-full lg:h-[500px] lg:w-[1000px] bg-no-repeat bg-contain bg-right" aria-hidden="true"></div>
     </section>
 
     <!-- Stats Section -->
@@ -84,11 +87,11 @@
         <p class="text-3xl font-semibold text-gray-900">250+</p>
         <p class="text-sm font-normal text-gray-600">Courses by our best mentors</p>
       </div>
-      <div class="p-6 border-x border-gray-200">
+      <div class="p-6 border-x-4 border-gray-200">
         <p class="text-3xl font-semibold text-gray-900">1000+</p>
         <p class="text-sm font-normal text-gray-600">Active Students</p>
       </div>
-      <div class="p-6 border-r border-gray-200">
+      <div class="p-6 border-r-4 border-gray-200">
         <p class="text-3xl font-semibold text-gray-900">15+</p>
         <p class="text-sm font-normal text-gray-600">Expert Instructors</p>
       </div>
@@ -98,6 +101,7 @@
       </div>
     </section>
 
+    
     <!-- Categories Section -->
     <div class="w-[90%] max-w-[1900px] mx-auto my-12">
       <div class="flex justify-between items-center mb-4">
@@ -108,11 +112,13 @@
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
         {% for category in categories %}
-          <div class="category-card p-6 rounded-lg bg-white">
+          <div class="bg-white border border-gray-300 shadow-[0_0_8px_0_#3B82F61F] rounded-2xl py-14 flex flex-col items-center text-center cursor-pointer">
             <a href="{% url 'product_details' category.id %}" class="category-card">
             <div class="flex flex-col items-center text-center">
               {% if category.img %}
-                <img src="{{ category.img.url }}" alt="{{ category.title }}" class="w-16 h-16 mb-4">
+              <div class="bg-[#E0F2FE] w-24 h-24 rounded-full flex items-center justify-center mb-2">
+                <img src="{{ category.img.url }}" alt="{{ category.title }}" class="w-16 h-16">
+              </div>
               {% endif %}
               <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ category.title }}</h3>
               <p class="text-sm text-gray-600">{{ category.count }} Courses</p>
